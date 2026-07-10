@@ -61,21 +61,16 @@
       radial-gradient(50% 50% at 10% 85%, rgba(63,157,91,.14), transparent 60%);
   }
 
-  /* --- Signature animated loop illustration --- */
-  .loop-svg .droplet{ animation: dropletFall 4s cubic-bezier(.55,0,.3,1) infinite; }
-  @keyframes dropletFall{
-    0%{ transform: translateY(0); opacity: 0; }
-    8%{ opacity: 1; }
-    38%{ transform: translateY(64px); opacity: 1; }
-    46%{ opacity: 0; }
-    100%{ opacity: 0; }
+  /* --- Signature animated illustration: sensor -> microcontrolador -> semáforo LED, con energía solar --- */
+  .loop-svg .sun-ray{ animation: sunPulse 4s ease-in-out infinite; transform-origin: center; }
+  @keyframes sunPulse{
+    0%,100%{ opacity:.5; }
+    50%{ opacity:1; }
   }
-  .loop-svg .soil-fill{ animation: soilBreathe 4s ease-in-out infinite; transform-origin: center bottom; }
-  @keyframes soilBreathe{
-    0%,100%{ transform: scaleY(.55); }
-    45%{ transform: scaleY(.55); }
-    65%{ transform: scaleY(1); }
-    90%{ transform: scaleY(1); }
+  .loop-svg .battery-fill{ animation: batteryCharge 4s ease-in-out infinite; transform-origin: left center; }
+  @keyframes batteryCharge{
+    0%,100%{ transform: scaleX(.3); }
+    50%{ transform: scaleX(1); }
   }
   .loop-svg .pulse-ring{ animation: pulseRing 4s ease-in-out infinite; transform-origin: center; }
   @keyframes pulseRing{
@@ -84,17 +79,20 @@
     62%{ opacity:0; transform: scale(1.5); }
     100%{ opacity:0; }
   }
-  .loop-svg .led-dot{ animation: ledBlink 4s ease-in-out infinite; }
-  @keyframes ledBlink{
-    0%,55%{ fill: var(--gris-claro); }
-    65%,100%{ fill: var(--verde-claro); }
+  /* semáforo: un color a la vez, en secuencia con el resto de la ilustración */
+  .loop-svg .semaforo-rojo{ animation: semaforoRojo 4s ease-in-out infinite; }
+  @keyframes semaforoRojo{
+    0%,48%{ fill: var(--gris-claro); }
+    56%,72%{ fill: #d9534f; }
+    80%,100%{ fill: var(--gris-claro); }
   }
-  .loop-svg .pump-body{ animation: pumpNudge 4s ease-in-out infinite; transform-origin: center; }
-  @keyframes pumpNudge{
-    0%,10%{ transform: scale(1); }
-    16%{ transform: scale(1.08); }
-    22%{ transform: scale(1); }
-    100%{ transform: scale(1); }
+  .loop-svg .semaforo-azul{ animation: semaforoAzul 4s ease-in-out infinite; }
+  @keyframes semaforoAzul{
+    0%,100%{ fill: var(--gris-claro); }
+  }
+  .loop-svg .semaforo-amarillo{ animation: semaforoAmarillo 4s ease-in-out infinite; }
+  @keyframes semaforoAmarillo{
+    0%,100%{ fill: var(--gris-claro); }
   }
 
   /* flow diagram dashed lines */
