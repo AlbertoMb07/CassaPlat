@@ -7,6 +7,18 @@
     --gris-claro: #EAEAEA;
     --blanco: #FFFFFF;
   }
+/* --- MODO OSCURO --- */
+  [data-theme="dark"] {
+    --blanco: #121619;          /* Convierte el fondo principal en oscuro */
+    --gris-oscurisimo: #EAEAEA; /* Hace que el texto principal sea claro */
+    --gris-oscuro: #A1A9B3;     /* Texto secundario más claro */
+    --gris-claro: #2A3036;      /* Fondos tenues y bordes más oscuros */
+  }
+
+  /* Transición suave para que el cambio no sea de golpe */
+  body, .bg-white, .card, #navbar, .timeline-dot {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
   html{ scroll-behavior: smooth; }
   body{ font-family:'Inter', sans-serif; color: var(--gris-oscurisimo); background:#FFFFFF; }
   h1,h2,h3,h4,.font-display{ font-family:'Space Grotesk', sans-serif; }
