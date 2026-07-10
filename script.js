@@ -44,14 +44,13 @@
 
   // ---- Componentes data ----
   var componentes = [
-    { icon:'💧', name:'Sensor de humedad', short:'Mide qué tan húmeda está la tierra.', tech:'Sensor resistivo o capacitivo que entrega una señal analógica proporcional a la humedad del sustrato.', func:'Es el punto de partida del ciclo: sin su lectura, el Arduino no sabe cuándo regar.' },
-    { icon:'🧠', name:'Arduino', short:'El cerebro que toma las decisiones.', tech:'Microcontrolador que lee el valor del sensor, lo compara contra un umbral programado y activa o desactiva la bomba.', func:'Coordina a todos los demás componentes según la lógica del programa.' },
-    { icon:'🌀', name:'Bomba de agua', short:'Empuja el agua hacia la planta.', tech:'Micro bomba sumergible de bajo voltaje, activada por una señal digital del Arduino, a veces mediante un relevador.', func:'Ejecuta la acción física de riego cuando el sistema lo indica.' },
-    { icon:'🪣', name:'Depósito de agua', short:'Guarda el agua disponible para regar.', tech:'Recipiente casero reutilizado que alimenta a la bomba por gravedad o succión directa.', func:'Es la fuente de agua del sistema; su nivel limita la autonomía del riego.' },
-    { icon:'💡', name:'LED indicador', short:'Muestra el estado del sistema de un vistazo.', tech:'LED conectado a una salida digital del Arduino, controlado por software según el estado de humedad o riego.', func:'Da retroalimentación visual inmediata sin necesidad de revisar el código o una pantalla.' },
-    { icon:'🔌', name:'Fuente de alimentación', short:'Le da energía a todo el sistema.', tech:'Fuente USB o batería que alimenta al Arduino y, según el diseño, a la bomba de agua.', func:'Sin energía constante, el ciclo automático se detiene por completo.' },
-    { icon:'🪴', name:'Maceta', short:'El hogar físico de la planta.', tech:'Contenedor casero adaptado con orificios para el sensor y la manguera de riego.', func:'Contiene el sustrato donde se mide la humedad y se deposita el agua.' },
-    { icon:'🌱', name:'Planta', short:'La razón de ser de todo el sistema.', tech:'Cualquier planta de interior de riego moderado, usada como caso de prueba del sistema.', func:'Su bienestar es la métrica final de que el sistema funciona correctamente.' }
+    { icon:'📡', name:'Sensor de humedad del suelo', short:'Lee la señal que la planta no puede decirte con palabras.', tech:'Sensor expuesto a la tierra y al agua; con el tiempo puede sufrir corrosión galvánica.', func:'Es el punto de partida de la traducción: convierte una condición física en una señal eléctrica.' },
+    { icon:'🧠', name:'Microcontrolador (Arduino)', short:'Interpreta la lectura y decide qué color mostrar.', tech:'Recibe el valor del sensor y lo traduce en la señal que enciende el color correspondiente del semáforo.', func:'Es el traductor del sistema: convierte un dato técnico en una respuesta simple de leer.' },
+    { icon:'🚦', name:'LED semáforo (rojo, azul, amarillo, verde)', short:'La respuesta visual que cualquiera puede leer.', tech:'Cuatro colores controlados por el microcontrolador, cada uno asociado a un estado distinto de humedad.', func:'Convierte la jardinería en algo tan simple como leer el tablero de un auto.' },
+    { icon:'☀️', name:'Panel solar', short:'Da autonomía energética al sistema.', tech:'Capta energía solar para cargar las pilas recargables del sistema.', func:'Evita que la maceta dependa de estar conectada a la corriente eléctrica.' },
+    { icon:'🔋', name:'Pilas recargables', short:'Guardan la energía que junta el panel solar.', tech:'Se cargan con el panel solar y alimentan al microcontrolador y al semáforo LED; pierden vida útil con el tiempo.', func:'Mantienen el sistema encendido de forma continua y sostenible.' },
+    { icon:'🪴', name:'Maceta impresa en 3D', short:'El cuerpo del producto, fácil de iterar.', tech:'Fabricada por impresión 3D, lo que permite prototipar rápido y personalizar el diseño sin moldes costosos.', func:'Aloja a la planta y a todos los componentes electrónicos del sistema.' },
+    { icon:'🛡️', name:'Sellado impermeable de los circuitos', short:'Protege la electrónica del riego manual.', tech:'Encapsulado que aísla circuitos, microcontrolador y soldaduras del agua, incluido el riego en exceso.', func:'Evita cortocircuitos, ya que es la persona quien riega la planta directamente.' }
   ];
 
   var grid = document.getElementById('componentGrid');
@@ -83,19 +82,16 @@
 
   // ---- Timeline steps ----
   var pasos = [
-    { icon:'🏜️', text:'La tierra comienza a secarse.', tech:'La conductividad del sustrato disminuye a medida que pierde agua.' },
-    { icon:'📡', text:'El sensor mide la humedad.', tech:'Convierte la condición física del suelo en una señal eléctrica analógica.' },
-    { icon:'🧠', text:'El Arduino recibe el valor.', tech:'Lee la señal mediante una entrada analógica y la traduce a un número.' },
-    { icon:'⚖️', text:'El Arduino compara con un umbral programado.', tech:'Contrasta la lectura actual contra un valor mínimo definido en el código.' },
-    { icon:'🔻', text:'Si la humedad es baja...', tech:'La condición del programa se cumple y se dispara la acción de riego.' },
-    { icon:'⚡', text:'Activa un relevador o directamente la bomba.', tech:'Envía una señal digital que enciende la bomba, con o sin relevador intermedio.' },
-    { icon:'🌀', text:'La bomba extrae agua del depósito.', tech:'El motor genera succión y desplaza el agua hacia la manguera de salida.' },
-    { icon:'💧', text:'El agua llega a la maceta.', tech:'El agua recorre la manguera hasta la superficie del sustrato.' },
-    { icon:'🌿', text:'La tierra recupera humedad.', tech:'El sustrato absorbe el agua y su conductividad vuelve a subir.' },
-    { icon:'📡', text:'El sensor vuelve a medir.', tech:'El ciclo de lectura se repite de forma continua.' },
-    { icon:'✅', text:'Si ya existe suficiente humedad...', tech:'La nueva lectura supera el umbral mínimo programado.' },
-    { icon:'🛑', text:'El Arduino apaga la bomba.', tech:'La salida digital vuelve a su estado inactivo.' },
-    { icon:'💡', text:'El LED indica el estado del sistema.', tech:'Cambia de color o parpadeo según si el sistema está regando o en reposo.' }
+    { icon:'🏜️', text:'La tierra comienza a secarse.', tech:'La condición física del sustrato cambia a medida que pierde humedad.' },
+    { icon:'📡', text:'El sensor mide la humedad del suelo.', tech:'Convierte esa condición en una señal eléctrica legible por el microcontrolador.' },
+    { icon:'🧠', text:'El microcontrolador interpreta la señal.', tech:'Traduce el dato del sensor en un estado: muy seco, bajo, óptimo o exceso de agua.' },
+    { icon:'🔴', text:'LED rojo: tierra muy seca, necesita agua urgente.', tech:'El microcontrolador enciende el color asociado a humedad crítica.' },
+    { icon:'🟡', text:'LED amarillo: humedad baja, pronto necesitará riego.', tech:'Aviso preventivo antes de que la planta llegue al punto crítico.' },
+    { icon:'🟢', text:'LED verde: humedad óptima, no es necesario regar.', tech:'El sistema confirma que no se requiere ninguna acción por ahora.' },
+    { icon:'🔵', text:'LED azul: exceso de agua, se regó de más.', tech:'Señal de que el riego manual superó lo que la planta necesitaba.' },
+    { icon:'👤', text:'El usuario riega la planta según el color.', tech:'La acción final siempre es manual: el sistema informa, la persona decide.' },
+    { icon:'📡', text:'El sensor vuelve a medir tras el riego.', tech:'El ciclo de lectura se repite de forma continua.' },
+    { icon:'☀️', text:'En paralelo, el panel solar carga las pilas.', tech:'La energía recargable mantiene encendido al sensor, el microcontrolador y el semáforo LED sin depender de un contacto eléctrico.' }
   ];
 
   var stepsWrap = document.getElementById('timelineSteps');
