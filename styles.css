@@ -7,12 +7,61 @@
     --gris-claro: #EAEAEA;
     --blanco: #FFFFFF;
   }
-/* --- MODO OSCURO --- */
-  [data-theme="dark"] {
-    --blanco: #121619;          /* Convierte el fondo principal en oscuro */
-    --gris-oscurisimo: #EAEAEA; /* Hace que el texto principal sea claro */
-    --gris-oscuro: #A1A9B3;     /* Texto secundario más claro */
-    --gris-claro: #2A3036;      /* Fondos tenues y bordes más oscuros */
+/* --- MODO OSCURO (CORREGIDO) --- */
+  /* Fondos principales */
+  [data-theme="dark"] body,
+  [data-theme="dark"] .bg-white {
+      background-color: #121619 !important;
+      color: #EAEAEA !important;
+  }
+
+  /* Fondos secundarios (como la sección de componentes) */
+  [data-theme="dark"] .bg-gris-light\/40 {
+      background-color: #1A1F24 !important;
+  }
+
+  /* Tarjetas (Cards) */
+  [data-theme="dark"] .card {
+      background-color: #1E252B !important;
+      border-color: #3B424B !important;
+  }
+
+  /* Barra de navegación */
+  [data-theme="dark"] #navbar {
+      background: rgba(18, 22, 25, 0.85) !important;
+  }
+
+  /* Menú de celulares */
+  [data-theme="dark"] #mobileMenu {
+      background-color: #1E252B !important;
+      border-color: #3B424B !important;
+  }
+
+  /* Colores de Texto */
+  [data-theme="dark"] .text-gris-darker,
+  [data-theme="dark"] .text-gris-oscurisimo {
+      color: #FFFFFF !important;
+  }
+
+  [data-theme="dark"] .text-gris-dark {
+      color: #A1A9B3 !important;
+  }
+
+  /* Enlaces de navegación */
+  [data-theme="dark"] .nav-link,
+  [data-theme="dark"] .mobile-link {
+      color: #EAEAEA !important;
+  }
+
+  /* Detalles estéticos (Línea de tiempo e iconos móviles) */
+  [data-theme="dark"] .timeline-dot {
+      background-color: #1E252B !important;
+      box-shadow: 0 0 0 6px #121619 !important;
+  }
+  
+  [data-theme="dark"] #iconMenu path,
+  [data-theme="dark"] #iconClose path {
+      stroke: #EAEAEA !important;
   }
 
   /* Transición suave para que el cambio no sea de golpe */
